@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Top Artists</title>
+    <style>
+        .artist {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            display: inline-block;
+            text-align: center;
+        }
+        .artist img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Top 10 Artists</h1>
+    <div>
+        {% for artist in top_artists %}
+            <div class="artist">
+                <a href="{{ url_for('artist_detail', artist_id=artist['id']) }}">
+                    <img src="{{ artist['images'][0]['url'] }}" alt="{{ artist['name'] }}">
+                    <h2>{{ artist['name'] }}</h2>
+                </a>
+                <p>Popularity: {{ artist['popularity'] }}</p>
+                <p>Genres: {{ artist['genres'] | join(', ') }}</p>
+                <p>Followers: {{ artist['followers']['total'] }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
